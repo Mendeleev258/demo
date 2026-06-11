@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_DB: paint
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - ./init-docker.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/paint
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
+    ports:
+      - "8080:8080"
