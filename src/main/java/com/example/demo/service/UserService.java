@@ -44,7 +44,7 @@ public class UserService {
     public User create(CreateUserRequest request) {
         userRepository.lockOnValue(request.login());
         Optional<User> mabeUser = userRepository.findByLogin(request.login());
-        if(mabeUser.isPresent()) {
+        if (mabeUser.isPresent()) {
             throw new ValidationException(ErrorCode.USER_ALREADY_EXISTS);
         }
         User newUser = new User(
@@ -54,7 +54,7 @@ public class UserService {
                 passwordEncoder.encode(request.password()),
                 Role.USER
         );
-        if(!userRepository.create(newUser)) {
+        if (!userRepository.create(newUser)) {
             throw new ValidationException("User creation failed");
         }
         return newUser;
@@ -79,7 +79,7 @@ public class UserService {
                 oldUser.getRole()
 
         );
-        if(!userRepository.update(updatedUser)) {
+        if (!userRepository.update(updatedUser)) {
             throw new ValidationException("User updating failed");
         }
         return updatedUser;

@@ -52,8 +52,7 @@ class UserControllerTest {
 
         UserResponse response = new UserResponse(UUID.randomUUID(), login, login);
 
-        when(userService.findByLogin(login))
-                .thenReturn(Optional.of(response));
+        when(userService.findByLogin(login)).thenReturn(Optional.of(response));
 
         Optional<UserResponse> result = userController.findByLogin(login);
 

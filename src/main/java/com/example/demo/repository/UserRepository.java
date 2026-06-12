@@ -43,11 +43,11 @@ public class UserRepository {
     public Boolean create(User user) {
         String sql = "insert into users (id, name, login, password_hash) values (:id, :name, :login, :passwordHash);";
         return namedParameterJdbcTemplate.update(sql, Map.of(
-                "id", user.getId(),
-                "name", user.getName(),
-                "login", user.getLogin(),
-                "passwordHash", user.getPasswordHash()
-            )
+                        "id", user.getId(),
+                        "name", user.getName(),
+                        "login", user.getLogin(),
+                        "passwordHash", user.getPasswordHash()
+                )
         ) == 1;
     }
 
@@ -84,7 +84,7 @@ public class UserRepository {
 
     public Optional<User> findById(UUID id) {
         String sql = "select id, name, login, password_hash, role from users where id = :id";
-        return namedParameterJdbcTemplate.query( sql, Map.of("id", id), USER_FULL_MAPPER).stream().findFirst();
+        return namedParameterJdbcTemplate.query(sql, Map.of("id", id), USER_FULL_MAPPER).stream().findFirst();
     }
 
     private static final RowMapper<User> USER_ROW_MAPPER = (rs, rowNum) -> new User(

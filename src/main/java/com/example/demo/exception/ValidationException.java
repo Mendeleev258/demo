@@ -4,6 +4,7 @@ import com.example.demo.response.ErrorCode;
 
 public class ValidationException extends RuntimeException {
     private ErrorCode errorCode;
+
     public ValidationException(String message) {
         super(message);
     }

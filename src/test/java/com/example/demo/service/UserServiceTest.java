@@ -42,8 +42,7 @@ class UserServiceTest {
         User user = mock(User.class);
         when(user.getLogin()).thenReturn(login);
 
-        when(userRepository.findByLogin(login))
-                .thenReturn(Optional.of(user));
+        when(userRepository.findByLogin(login)).thenReturn(Optional.of(user));
 
         Optional<UserResponse> result = userService.findByLogin(login);
 
@@ -54,11 +53,9 @@ class UserServiceTest {
     @Test
     void findByLogin_shouldReturnEmpty_whenUserNotExists() {
 
-        when(userRepository.findByLogin(login))
-                .thenReturn(Optional.empty());
+        when(userRepository.findByLogin(login)).thenReturn(Optional.empty());
 
-        Optional<UserResponse> result =
-                userService.findByLogin(login);
+        Optional<UserResponse> result = userService.findByLogin(login);
 
         assertTrue(result.isEmpty());
     }
@@ -66,15 +63,13 @@ class UserServiceTest {
     @Test
     void create_shouldThrowException_whenUserAlreadyExists() {
 
-        CreateUserRequest request =
-                mock(CreateUserRequest.class);
+        CreateUserRequest request = mock(CreateUserRequest.class);
 
         User user = mock(User.class);
 
         when(request.login()).thenReturn(login);
 
-        when(userRepository.findByLogin(login))
-                .thenReturn(Optional.of(user));
+        when(userRepository.findByLogin(login)).thenReturn(Optional.of(user));
 
         assertThrows(
                 ValidationException.class,
@@ -87,14 +82,11 @@ class UserServiceTest {
 
         CreateUserRequest request = new CreateUserRequest(login, login, login);
 
-        when(userRepository.findByLogin(login))
-                .thenReturn(Optional.empty());
+        when(userRepository.findByLogin(login)).thenReturn(Optional.empty());
 
-        when(passwordEncoder.encode(login))
-                .thenReturn("encodedPassword");
+        when(passwordEncoder.encode(login)).thenReturn("encodedPassword");
 
-        when(userRepository.create(any(User.class)))
-                .thenReturn(true);
+        when(userRepository.create(any(User.class))).thenReturn(true);
 
         User result = userService.create(request);
 
@@ -111,14 +103,11 @@ class UserServiceTest {
 
         CreateUserRequest request = new CreateUserRequest(login, login, login);
 
-        when(userRepository.findByLogin(login))
-                .thenReturn(Optional.empty());
+        when(userRepository.findByLogin(login)).thenReturn(Optional.empty());
 
-        when(passwordEncoder.encode(login))
-                .thenReturn("encoded");
+        when(passwordEncoder.encode(login)).thenReturn("encoded");
 
-        when(userRepository.create(any(User.class)))
-                .thenReturn(false);
+        when(userRepository.create(any(User.class))).thenReturn(false);
 
         assertThrows(ValidationException.class,
                 () -> userService.create(request));
@@ -143,17 +132,13 @@ class UserServiceTest {
 
         when(authentication.getName()).thenReturn(login);
 
-        when(userRepository.findByLogin(login))
-                .thenReturn(Optional.of(oldUser));
+        when(userRepository.findByLogin(login)).thenReturn(Optional.of(oldUser));
 
-        when(userRepository.findByLogin("newLogin"))
-                .thenReturn(Optional.empty());
+        when(userRepository.findByLogin("newLogin")).thenReturn(Optional.empty());
 
-        when(passwordEncoder.encode(login))
-                .thenReturn("encoded");
+        when(passwordEncoder.encode(login)).thenReturn("encoded");
 
-        when(userRepository.update(any(User.class)))
-                .thenReturn(true);
+        when(userRepository.update(any(User.class))).thenReturn(true);
 
         User result = userService.update(request, authentication);
 

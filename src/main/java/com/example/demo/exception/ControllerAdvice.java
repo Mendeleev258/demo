@@ -9,7 +9,7 @@ import com.example.demo.response.ErrorResponse;
 @RestControllerAdvice
 public class ControllerAdvice {
     @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<ErrorResponse> handleValidationException(final ValidationException exception ) {
-        return ResponseEntity.badRequest().body(new ErrorResponse(exception.getMessage(),exception.getErrorCode()));
+    public ResponseEntity<ErrorResponse> handleValidationException(final ValidationException exception) {
+        return ResponseEntity.badRequest().body(new ErrorResponse(exception.getMessage(), exception.getErrorCode()));
     }
 }

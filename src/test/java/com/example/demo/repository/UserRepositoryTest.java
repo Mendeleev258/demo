@@ -81,7 +81,7 @@ public class UserRepositoryTest {
     @Test
     void create_shouldReturnTrue_whenOneRowInserted() {
 
-        User user = new User( UUID.randomUUID(), login, login, login, Role.USER);
+        User user = new User(UUID.randomUUID(), login, login, login, Role.USER);
 
         when(namedParameterJdbcTemplate.update(
                 anyString(),
@@ -96,7 +96,7 @@ public class UserRepositoryTest {
     @Test
     void update_shouldReturnTrue_whenOneRowUpdated() {
 
-        User user = new User( UUID.randomUUID(), login, login, login, Role.USER);
+        User user = new User(UUID.randomUUID(), login, login, login, Role.USER);
 
         when(namedParameterJdbcTemplate.update(
                 anyString(),
@@ -115,8 +115,8 @@ public class UserRepositoryTest {
                 anyString(),
                 anyMap()
         ))
-                .thenReturn(1) // DELETE paintings
-                .thenReturn(0); // DELETE users
+                .thenReturn(1) // удаляем все картинки этого пользователя
+                .thenReturn(0); // удаляем пользоателя
 
         assertThrows(
                 ValidationException.class,

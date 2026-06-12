@@ -37,12 +37,9 @@ class PaintingControllerTest {
     @Test
     void findAll_shouldReturnPaintings() {
 
-        List<Painting> expected = List.of(
-                new Painting(id, title, "style", 2000, 0, userId)
-        );
+        List<Painting> expected = List.of(new Painting(id, title, "style", 2000, 0, userId));
 
-        when(paintingService.findAll(0, 10))
-                .thenReturn(expected);
+        when(paintingService.findAll(0, 10)).thenReturn(expected);
 
         List<Painting> result = paintingController.findAll(0, 10);
 
@@ -55,8 +52,7 @@ class PaintingControllerTest {
 
         Painting painting = new Painting(id, title, "style", 2000, 0, userId);
 
-        when(paintingService.findById(id))
-                .thenReturn(Optional.of(painting));
+        when(paintingService.findById(id)).thenReturn(Optional.of(painting));
 
         Optional<Painting> result = paintingController.findById(id);
 
@@ -69,17 +65,13 @@ class PaintingControllerTest {
     @Test
     void createPainting_shouldCallService() {
 
-        CreatePaintingRequest request =
-                new CreatePaintingRequest(title, "style", 2000);
+        CreatePaintingRequest request = new CreatePaintingRequest(title, "style", 2000);
 
-        Painting painting =
-                new Painting(id, title, "style", 2000, 0, userId);
+        Painting painting = new Painting(id, title, "style", 2000, 0, userId);
 
-        when(paintingService.create(request, authentication))
-                .thenReturn(painting);
+        when(paintingService.create(request, authentication)).thenReturn(painting);
 
-        Painting result =
-                paintingController.createPainting(request, authentication);
+        Painting result = paintingController.createPainting(request, authentication);
 
         assertThat(result).isEqualTo(painting);
 
@@ -89,14 +81,11 @@ class PaintingControllerTest {
     @Test
     void findByTitle_shouldReturnPaintings() {
 
-        List<Painting> expected =
-                List.of(new Painting(id, title, "style", 2000, 0, userId));
+        List<Painting> expected = List.of(new Painting(id, title, "style", 2000, 0, userId));
 
-        when(paintingService.findByTitle(title))
-                .thenReturn(expected);
+        when(paintingService.findByTitle(title)).thenReturn(expected);
 
-        List<Painting> result =
-                paintingController.findByTitle(title);
+        List<Painting> result = paintingController.findByTitle(title);
 
         assertThat(result).isEqualTo(expected);
         verify(paintingService).findByTitle(title);
@@ -105,14 +94,11 @@ class PaintingControllerTest {
     @Test
     void findByUserId_shouldReturnPaintings() {
 
-        List<Painting> expected =
-                List.of(new Painting(id, title, "style", 2000, 0, userId));
+        List<Painting> expected = List.of(new Painting(id, title, "style", 2000, 0, userId));
 
-        when(paintingService.findByUserId(userId))
-                .thenReturn(expected);
+        when(paintingService.findByUserId(userId)).thenReturn(expected);
 
-        List<Painting> result =
-                paintingController.findByUserId(userId);
+        List<Painting> result = paintingController.findByUserId(userId);
 
         assertThat(result).isEqualTo(expected);
         verify(paintingService).findByUserId(userId);
@@ -121,17 +107,13 @@ class PaintingControllerTest {
     @Test
     void updatePainting_shouldCallService() {
 
-        UpdatePaintingRequest request =
-                new UpdatePaintingRequest(title, "style", 2000, 0);
+        UpdatePaintingRequest request = new UpdatePaintingRequest(title, "style", 2000, 0);
 
-        Painting painting =
-                new Painting(id, title, "style", 2000, 0, userId);
+        Painting painting =  new Painting(id, title, "style", 2000, 0, userId);
 
-        when(paintingService.update(id, request, authentication))
-                .thenReturn(painting);
+        when(paintingService.update(id, request, authentication)).thenReturn(painting);
 
-        Painting result =
-                paintingController.updatePainting(id, request, authentication);
+        Painting result = paintingController.updatePainting(id, request, authentication);
 
         assertThat(result).isEqualTo(painting);
 

@@ -6,6 +6,7 @@ import com.example.demo.request.UpdatePaintingRequest;
 import com.example.demo.service.PaintingService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

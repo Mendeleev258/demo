@@ -1,4 +1,4 @@
 package com.example.demo.response;
 
-public record ErrorResponse( String message, ErrorCode errorCode) {
+public record ErrorResponse(String message, ErrorCode errorCode) {
 }

@@ -44,8 +44,7 @@ class PaintingServiceTest {
 
         Painting painting = mock(Painting.class);
 
-        when(paintingRepository.findById(1))
-                .thenReturn(Optional.of(painting));
+        when(paintingRepository.findById(1)).thenReturn(Optional.of(painting));
 
         Optional<Painting> result = paintingService.findById(1);
 
@@ -56,8 +55,7 @@ class PaintingServiceTest {
     @Test
     void findById_shouldReturnEmpty_whenNotExists() {
 
-        when(paintingRepository.findById(1))
-                .thenReturn(Optional.empty());
+        when(paintingRepository.findById(1)).thenReturn(Optional.empty());
 
         Optional<Painting> result = paintingService.findById(1);
 
@@ -71,8 +69,7 @@ class PaintingServiceTest {
 
         when(authentication.getName()).thenReturn(login);
 
-        when(userRepository.findByLogin(login))
-                .thenReturn(Optional.empty());
+        when(userRepository.findByLogin(login)).thenReturn(Optional.empty());
 
         assertThrows(ValidationException.class,
                 () -> paintingService.create(request, authentication));
@@ -89,11 +86,9 @@ class PaintingServiceTest {
         when(authentication.getName()).thenReturn(login);
         when(user.getId()).thenReturn(userId);
 
-        when(userRepository.findByLogin(login))
-                .thenReturn(Optional.of(user));
+        when(userRepository.findByLogin(login)).thenReturn(Optional.of(user));
 
-        when(paintingRepository.create(any(Painting.class)))
-                .thenReturn(true);
+        when(paintingRepository.create(any(Painting.class))).thenReturn(true);
 
         Painting result = paintingService.create(request, authentication);
 
@@ -113,11 +108,9 @@ class PaintingServiceTest {
 
         when(authentication.getName()).thenReturn(login);
 
-        when(userRepository.findByLogin(login))
-                .thenReturn(Optional.of(user));
+        when(userRepository.findByLogin(login)).thenReturn(Optional.of(user));
 
-        when(paintingRepository.create(any(Painting.class)))
-                .thenReturn(false);
+        when(paintingRepository.create(any(Painting.class))).thenReturn(false);
 
         assertThrows(ValidationException.class,
                 () -> paintingService.create(request, authentication));
@@ -138,14 +131,11 @@ class PaintingServiceTest {
         when(painting.getUserId()).thenReturn(userId);
         when(user.getId()).thenReturn(userId);
 
-        when(paintingRepository.findById(id))
-                .thenReturn(Optional.of(painting));
+        when(paintingRepository.findById(id)).thenReturn(Optional.of(painting));
 
-        when(userRepository.findByLogin(login))
-                .thenReturn(Optional.of(user));
+        when(userRepository.findByLogin(login)).thenReturn(Optional.of(user));
 
-        when(paintingRepository.deleteById(id))
-                .thenReturn(true);
+        when(paintingRepository.deleteById(id)).thenReturn(true);
 
         paintingService.deleteById(id, authentication);
 
@@ -157,10 +147,10 @@ class PaintingServiceTest {
 
         Integer id = 1;
 
-        UpdatePaintingRequest request = new UpdatePaintingRequest("Test", "Style", 2000, 0);
+        UpdatePaintingRequest request =
+                new UpdatePaintingRequest("Test", "Style", 2000, 0);
 
-        when(paintingRepository.findById(id))
-                .thenReturn(Optional.empty());
+        when(paintingRepository.findById(id)).thenReturn(Optional.empty());
 
         assertThrows(ValidationException.class,
                 () -> paintingService.update(id, request, authentication));
@@ -169,8 +159,7 @@ class PaintingServiceTest {
     @Test
     void findAll_shouldReturnList() {
 
-        when(paintingRepository.findAll(0, 10))
-                .thenReturn(List.of());
+        when(paintingRepository.findAll(0, 10)).thenReturn(List.of());
 
         List<Painting> result = paintingService.findAll(0, 10);
 

@@ -21,17 +21,17 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserResponse> findAll(){
+    public List<UserResponse> findAll() {
         return userService.findAll();
     }
 
     @GetMapping("/search")
-    public Optional<UserResponse> findByLogin(@RequestParam String login){
+    public Optional<UserResponse> findByLogin(@RequestParam String login) {
         return userService.findByLogin(login);
     }
 
     @PostMapping
-    public User createUser(@RequestBody CreateUserRequest request ){
+    public User createUser(@RequestBody CreateUserRequest request) {
         return userService.create(request);
     }
 
