@@ -51,7 +51,7 @@ public class UserService {
                 UUID.randomUUID(),
                 request.name(),
                 request.login(),
-                passwordEncoder.encode(request.passwordHash()),
+                passwordEncoder.encode(request.password()),
                 Role.USER
         );
         if(!userRepository.create(newUser)) {
@@ -75,7 +75,7 @@ public class UserService {
                 oldUser.getId(),
                 request.name(),
                 request.login(),
-                passwordEncoder.encode(request.passwordHash()),
+                passwordEncoder.encode(request.password()),
                 oldUser.getRole()
 
         );

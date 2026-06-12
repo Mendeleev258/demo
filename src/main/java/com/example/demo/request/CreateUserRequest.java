@@ -1,4 +1,4 @@
 package com.example.demo.request;
 
-public record CreateUserRequest(String name, String login, String passwordHash) {
+public record CreateUserRequest(String name, String login, String password) {
 }
