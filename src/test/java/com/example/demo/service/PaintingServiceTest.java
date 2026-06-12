@@ -67,7 +67,7 @@ class PaintingServiceTest {
     @Test
     void create_shouldThrow_whenUserNotFound() {
 
-        CreatePaintingRequest request = new CreatePaintingRequest("Test", "Style", 6767);
+        CreatePaintingRequest request = new CreatePaintingRequest("Test", "Style", 2000);
 
         when(authentication.getName()).thenReturn(login);
 
@@ -81,7 +81,7 @@ class PaintingServiceTest {
     @Test
     void create_shouldCreatePainting_whenValid() {
 
-        CreatePaintingRequest request = new CreatePaintingRequest("Test", "Style", 6767);
+        CreatePaintingRequest request = new CreatePaintingRequest("Test", "Style", 2000);
 
         User user = mock(User.class);
         UUID userId = UUID.randomUUID();
@@ -99,7 +99,7 @@ class PaintingServiceTest {
 
         assertEquals("Test", result.getTitle());
         assertEquals("Style", result.getStyle());
-        assertEquals(6767, result.getYearCreated());
+        assertEquals(2000, result.getYearCreated());
 
         verify(paintingRepository).create(any(Painting.class));
     }
@@ -107,7 +107,7 @@ class PaintingServiceTest {
     @Test
     void create_shouldThrow_whenInsertFails() {
 
-        CreatePaintingRequest request = new CreatePaintingRequest("Test", "Style", 6767);
+        CreatePaintingRequest request = new CreatePaintingRequest("Test", "Style", 2000);
 
         User user = mock(User.class);
 
@@ -157,7 +157,7 @@ class PaintingServiceTest {
 
         Integer id = 1;
 
-        UpdatePaintingRequest request = new UpdatePaintingRequest("Test", "Style", 6767, 0);
+        UpdatePaintingRequest request = new UpdatePaintingRequest("Test", "Style", 2000, 0);
 
         when(paintingRepository.findById(id))
                 .thenReturn(Optional.empty());
