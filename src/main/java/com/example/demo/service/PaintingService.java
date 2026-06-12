@@ -10,6 +10,8 @@ import com.example.demo.request.UpdatePaintingRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.core.Authentication;
+
+import java.time.Year;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -37,6 +39,10 @@ public class PaintingService {
         User user = userRepository.findByLogin(auth.getName())
                 .orElseThrow(() -> new ValidationException("User not found"));
 
+        if (request.yearCreated() <= 0 || request.yearCreated() > Year.now().getValue()) {
+            throw new ValidationException("Invalid year");
+        }
+
         Painting painting = new Painting(null, request.title(),
                 request.style(), request.yearCreated(), 0, user.getId());
         if (!paintingRepository.create(painting)) {
@@ -58,6 +64,10 @@ public class PaintingService {
         Optional<Painting> maybePainting = paintingRepository.findById(id);
         if (maybePainting.isEmpty()) {
             throw new ValidationException("Painting not found");
+        }
+
+        if (request.yearCreated() <= 0 || request.yearCreated() > Year.now().getValue()) {
+            throw new ValidationException("Invalid year");
         }
 
         Painting oldPainting = maybePainting.get();

@@ -81,7 +81,7 @@ class PaintingRepositoryTest {
     @Test
     void create_shouldReturnTrue_whenInserted() {
 
-        Painting painting = new Painting(1,"Test", "Style", 6767, 0, UUID.randomUUID());
+        Painting painting = new Painting(1,"Test", "Style", 2000, 0, UUID.randomUUID());
 
         when(namedParameterJdbcTemplate.update(
                 anyString(),
@@ -96,7 +96,7 @@ class PaintingRepositoryTest {
     @Test
     void update_shouldReturnTrue_whenUpdated() {
 
-        Painting painting = new Painting(1,"Test", "Style", 6767, 0, UUID.randomUUID());
+        Painting painting = new Painting(1,"Test", "Style", 2000, 0, UUID.randomUUID());
 
         when(namedParameterJdbcTemplate.update(
                 anyString(),
