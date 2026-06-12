@@ -1,21 +1,25 @@
 services:
   postgres:
-    image: postgres:18
+    image: postgres:17-alpine
     environment:
       POSTGRES_DB: paint
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
-    volumes:
-      - ./init-docker.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - "5432:5432"
+      - "5433:5432"
+    healthcheck:  # Добавляем проверку готовности БД
+      test: ["CMD-SHELL", "pg_isready -U postgres -d paint"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   app:
     build: .
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy  # Ждём, пока БД станет здоровой
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/paint
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/paint  # Внутри сети Docker порт 5432
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 1234
     ports:
